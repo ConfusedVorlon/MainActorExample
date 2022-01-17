@@ -37,8 +37,8 @@ class Model {
         print("returned from Background - now running off main thread")
 
         print("calling mainDate in doWork")
-        self.storedDate = self.mainDate //sometimes not main thread
-        printDate("in doWork") //sometimes not main thread
+        self.storedDate = await self.mainDate //sometimes not main thread
+        await printDate("in doWork") //sometimes not main thread
     }
     
     @IBAction func doWorkInAsyncFunctionWithPrint(_ sender: Any) {
@@ -58,8 +58,8 @@ class Model {
             print("returned from Background - now running off main thread")
 
             print("calling mainDate doInTask")
-            self.storedDate = self.mainDate //main thread
-            printDate("in doInTask") // main thread
+            self.storedDate = await self.mainDate //main thread
+            await printDate("in doInTask") // main thread
         }
     }
 }
