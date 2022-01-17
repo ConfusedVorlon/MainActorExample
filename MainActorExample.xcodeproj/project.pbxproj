@@ -38,7 +38,7 @@
 		D44673812791D8BB009F39DA = {
 			isa = PBXGroup;
 			children = (
-				D446738C2791D8BB009F39DA /* async3 */,
+				D446738C2791D8BB009F39DA /* mainActor */,
 				D446738B2791D8BB009F39DA /* Products */,
 			);
 			sourceTree = "<group>";
@@ -51,7 +51,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		D446738C2791D8BB009F39DA /* async3 */ = {
+		D446738C2791D8BB009F39DA /* mainActor */ = {
 			isa = PBXGroup;
 			children = (
 				D446738D2791D8BB009F39DA /* AppDelegate.swift */,
@@ -61,7 +61,7 @@
 				D44673932791D8BC009F39DA /* Main.storyboard */,
 				D44673962791D8BC009F39DA /* async3.entitlements */,
 			);
-			path = async3;
+			path = mainActor;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

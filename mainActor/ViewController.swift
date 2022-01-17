@@ -7,11 +7,9 @@
 
 import Cocoa
 
-//Actor that isn't main - so it runs off the main thread
+//Actor that isn't main - it runs off the main thread
 actor Background {
     func go() -> Date {
-        // complex work to load a user from the database
-        // happens here; we'll just send back an example
         print("Background go - main: \(Thread.isMainThread)")
         return Date()
     }
@@ -20,7 +18,6 @@ actor Background {
 
 class ViewController: NSViewController {
     
-
     var date:Date {
         print("main: \(Thread.isMainThread)")
         return Date()
@@ -45,6 +42,16 @@ class ViewController: NSViewController {
         }
     }
     
+    func doWork() async  {
+        let _ = await Background().go()
+
+        print("returned from Background - now running off main thread")
+
+        print("calling mainDate in doWork")
+        self.storedDate = self.mainDate //sometimes not main thread
+        printDate("in doWork") //sometimes not main thread
+    }
+    
     @IBAction func doWorkInAsyncFunctionWithPrint(_ sender: Any) {
 
         Task { @MainActor in
@@ -58,23 +65,15 @@ class ViewController: NSViewController {
         Task {
             let _ = await Background().go()
 
-            print("returned from oldStyle - now running off main thread")
+            print("returned from Background - now running off main thread")
 
             print("calling mainDate doInTask")
-            self.storedDate = self.mainDate //not main thread
-            printDate("in leaveMain") //not main thread
+            self.storedDate = self.mainDate //main thread
+            printDate("in doInTask") // main thread
         }
     }
     
-    func doWork() async  {
-        let _ = await Background().go()
 
-        print("returned from oldStyle - now running off main thread")
-
-        print("calling mainDate in doWork")
-        self.storedDate = self.mainDate //not main thread
-        printDate("in leaveMain") //not main thread
-    }
     
 
     
