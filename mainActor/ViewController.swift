@@ -7,7 +7,7 @@
 
 import Cocoa
 
-//Actor that isn't main - it runs off the main thread
+//Actor that isn't main - it does not run on the main thread
 actor Background {
     func go() -> Date {
         print("Background go - main: \(Thread.isMainThread)")
@@ -55,6 +55,7 @@ class ViewController: NSViewController {
     @IBAction func doWorkInAsyncFunctionWithPrint(_ sender: Any) {
 
         Task { @MainActor in
+            //Adding this print statement, magically makes everything in doWork run on the main thread!!!
             print("Srsly?")
             await doWork()
         }
